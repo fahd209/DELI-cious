@@ -12,6 +12,34 @@ public class Sandwish extends Product{
         super(name, size);
     }
 
+    public String getTypeOfBread() {
+        return typeOfBread;
+    }
+
+    public void setTypeOfBread(String typeOfBread) {
+        this.typeOfBread = typeOfBread;
+    }
+
+    public boolean isToasted() {
+        return isToasted;
+    }
+
+    public void setToasted(boolean toasted) {
+        isToasted = toasted;
+    }
+
+    public ArrayList<Toppings> getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(ArrayList<Toppings> toppings) {
+        this.toppings = toppings;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public double getBreadPrice()
     {
         double breadPrice = 0;
@@ -29,6 +57,25 @@ public class Sandwish extends Product{
         }
 
         return breadPrice;
+    }
+
+    public double getMeatPrice()
+    {
+        double meatPrice = 0;
+        switch (getSize())
+        {
+            case 4:
+                meatPrice += 1.00;
+                break;
+            case 8:
+                meatPrice += 2.00;
+                break;
+            case 12:
+                meatPrice += 3.00;
+                break;
+        }
+
+        return meatPrice;
     }
 
     @Override
