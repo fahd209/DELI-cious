@@ -1,8 +1,10 @@
 package com.pluralsight.models;
 
 public class Drink extends Product{
-    public Drink(String name, int size) {
+    String drinkType;
+    public Drink(String name, int size, String drinkType) {
         super(name, size);
+        this.drinkType = drinkType;
     }
 
     @Override
@@ -14,7 +16,7 @@ public class Drink extends Product{
             case 4 -> 2.00;
             case 8 -> 2.50;
             case 12 -> 3.00;
-            default -> 0;
+            default -> 0.00;
         };
     }
 }
