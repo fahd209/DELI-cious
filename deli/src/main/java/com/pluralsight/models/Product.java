@@ -1,6 +1,6 @@
 package com.pluralsight.models;
 
-public class Product {
+public abstract class Product {
     String name;
     int size;
 
