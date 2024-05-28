@@ -9,6 +9,7 @@ public class PremiumTopping extends Toppings{
 
     public PremiumTopping(String type, int sandWishSize, boolean isMeat, boolean isCheese, boolean isExtraCheese, boolean isExtraMeat) {
         super(type);
+        this.sandWishSize = sandWishSize;
         this.isExtraCheese = isExtraCheese;
         this.isExtraMeat = isExtraMeat;
         this.isMeat = isMeat;
@@ -54,10 +55,10 @@ public class PremiumTopping extends Toppings{
     public void setCheese(boolean cheese) {
         isCheese = cheese;
     }
-
     @Override
     public double getPrice()
     {
+
         double price = 0;
 
         if (isMeat())

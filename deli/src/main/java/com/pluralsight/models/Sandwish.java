@@ -40,6 +40,11 @@ public class Sandwish extends Product{
         this.price = price;
     }
 
+    public void addTopping(Toppings topping)
+    {
+        toppings.add(topping);
+    }
+
     public double getBreadPrice()
     {
         double breadPrice = 0;
