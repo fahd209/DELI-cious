@@ -59,7 +59,7 @@ public class PremiumTopping extends Toppings{
     public double getPrice()
     {
 
-        double price = 0;
+        double price = 5;
 
         if (isMeat())
         {

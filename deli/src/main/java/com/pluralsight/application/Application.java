@@ -40,13 +40,13 @@ public class Application {
                     addSandWish(newOrder);
                     break;
                 case 2:
-                    System.out.println("adding drink");
+                    addDrink(newOrder);
                     break;
                 case 3:
-                    System.out.println("adding chips");
+                    addChips(newOrder);
                     break;
                 case 4:
-                    System.out.println("Confirming order");
+                    checkOut(newOrder);
                     break;
                 case 0:
                     System.out.println("Canceling order");
@@ -65,33 +65,31 @@ public class Application {
 
         // getting type of meat from ui
         String[] meat = ui.getSandWishMeat();
-        Sandwich sandwish = new Sandwich(meat[0] + "Sandwich", sandWishSize, typeOfBread);
-        addMeat(sandwish, meat);
+        Sandwich sandwich = new Sandwich(meat[0] + "Sandwich", sandWishSize, typeOfBread);
+        addMeat(sandwich, meat);
 
         // getting sandwich Cheese from ui
         String[] cheese =  ui.getSandWishCheese();
-        addCheese(sandwish, cheese);
+        addCheese(sandwich, cheese);
 
         //getting regular topping from ui
         String[] regularToppings = ui.getRegularTopping();
-        addRegularTopping(sandwish,regularToppings);
+        addRegularTopping(sandwich,regularToppings);
 
         //getting sauces for ui
         String[] sauces = ui.getSauces();
-        addToppings(sandwish, sauces);
+        addSauces(sandwich, sauces);
 
         // checking if the sandwich is toasted from ui
-        sandwish.setToasted(ui.isSandwichToasted());
+        sandwich.setToasted(ui.isSandwichToasted());
+        order.addProduct(sandwich);
 
-        ArrayList<Toppings> toppings = sandwish.getToppings();
+        ArrayList<Product> products = order.getOrder();
+        ArrayList<Toppings> toppings = sandwich.getToppings();
 
-        for (Toppings topping : toppings)
-        {
-            System.out.printf(" %s - %.2f \n", topping.getType(), topping.getPrice());
-        }
     }
 
-    public void addMeat(Sandwich sandwish, String[] meat)
+    public void addMeat(Sandwich sandwich, String[] meat)
     {
         // checking topping are extra and adding them to the sandwich
         for (int i = 0; i < meat.length; i++)
@@ -99,12 +97,12 @@ public class Application {
             Toppings meatTopping;
             if (i < 1)
             {
-                meatTopping = new PremiumTopping(meat[i], sandwish.getSize(), true, false, false, false);
+                meatTopping = new PremiumTopping(meat[i], sandwich.getSize(), true, false, false, false);
             }
             else {
-                meatTopping = new PremiumTopping(meat[i], sandwish.getSize(), false, false, false, true);
+                meatTopping = new PremiumTopping("Extra "+meat[i], sandwich.getSize(), false, false, false, true);
             }
-            sandwish.addTopping(meatTopping);
+            sandwich.addTopping(meatTopping);
         }
     }
 
@@ -116,31 +114,115 @@ public class Application {
             Toppings meatTopping;
             if (i < 1)
             {
-                meatTopping = new PremiumTopping(cheese[i], sandwich.getSize(), false, true, false, false);
+                meatTopping = new PremiumTopping(cheese[i]+" cheese", sandwich.getSize(), false, true, false, false);
             }
             else {
-                meatTopping = new PremiumTopping(cheese[i], sandwich.getSize(), false, false, true, false);
+                meatTopping = new PremiumTopping("Extra "+cheese[i]+" cheese", sandwich.getSize(), false, false, true, false);
             }
             sandwich.addTopping(meatTopping);
         }
     }
 
-    public void addRegularTopping(Sandwich sandwish, String[] regularToppings)
+    public void addRegularTopping(Sandwich sandwich, String[] regularToppings)
     {
         for (int i = 0; i < regularToppings.length; i++)
         {
             Toppings toppings = new RegularToppings(regularToppings[i]);
-            sandwish.addTopping(toppings);
+            sandwich.addTopping(toppings);
         }
     }
 
-    public void addToppings(Sandwich sandwish, String[] sauces)
+    public void addSauces(Sandwich sandwich, String[] sauces)
     {
         for (int i = 0; i < sauces.length; i++)
         {
             Toppings toppings = new RegularToppings(sauces[i]);
-            sandwish.addTopping(toppings);
+            sandwich.addTopping(toppings);
         }
     }
-}
 
+    public void addDrink(Order order)
+    {
+        int size = ui.getDrinkSize();
+        String typeOfDrink = ui.getDrinkType();
+
+        Product drink = new Drink(typeOfDrink, size);
+        order.addProduct(drink);
+    }
+
+    public void addChips(Order order)
+    {
+        String typeOfChips = ui.getChipsType();
+        Product chips = new Chips(typeOfChips, 0);
+        order.addProduct(chips);
+    }
+
+    public void checkOut(Order order)
+    {
+        printReceipt(order);
+        int choice = ui.checkOut();
+        switch (choice)
+        {
+            case 1:
+                confirmOrder(order);
+                break;
+            case 2:
+                cancelOrder(order);
+                break;
+        }
+    }
+
+    public void printReceipt(Order order)
+    {
+        ArrayList<Product> products = order.getOrder();
+        System.out.println();
+        System.out.printf("Customer: %-10s\n", order.getCustomerName());
+        System.out.println("------------------------------------------");
+        System.out.printf("Date: %-10s\n", order.getOrderDate());
+
+        for (Product product : products)
+        {
+            if (product instanceof Sandwich)
+            {
+                System.out.printf("%d inch %s bread, %s\n", product.getSize(), ((Sandwich) product).getTypeOfBread(), product.getName());
+                ArrayList<Toppings> toppings = ((Sandwich) product).getToppings();
+                for (Toppings topping : toppings)
+                {
+                    System.out.printf("%-10s: %-10.2f\n", topping.getType(), product.getPrice());
+                }
+            }
+            else if (product instanceof Drink)
+            {
+                // getting drinks size
+                String size = getDrinksSize(product.getSize());
+
+                System.out.printf("%s %-10s %-10.2f\n", size, product.getName(), product.getPrice());
+            }
+            else
+            {
+                System.out.printf("%-10s %-10.2f\n", product.getName(), product.getPrice());
+            }
+        }
+    }
+
+    public void confirmOrder(Order order)
+    {
+
+    }
+
+    public void cancelOrder(Order order)
+    {
+
+    }
+
+    public String getDrinksSize(int size)
+    {
+        return switch (size)
+        {
+            case 4 -> "Small";
+            case 8 -> "Medium";
+            case 12 -> "Large";
+            default -> "";
+        };
+    }
+}

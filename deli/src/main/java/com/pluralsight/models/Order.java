@@ -7,10 +7,10 @@ import java.util.Locale;
 public class Order {
     String customerName;
     int orderNumber;
-    LocalDateTime orderDate;
+    String orderDate;
 
     ArrayList<Product> order = new ArrayList<>();
-    public Order(String customerName, int orderNumber, LocalDateTime orderDate)
+    public Order(String customerName, int orderNumber, String orderDate)
     {
         this.customerName = customerName;
         this.orderNumber = orderNumber;
@@ -33,11 +33,11 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
-    public LocalDateTime getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime dateTime) {
+    public void setOrderDate(String dateTime) {
         this.orderDate = dateTime;
     }
 
@@ -47,5 +47,10 @@ public class Order {
 
     public void setOrder(ArrayList<Product> order) {
         this.order = order;
+    }
+
+    public void addProduct(Product product)
+    {
+        order.add(product);
     }
 }

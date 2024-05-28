@@ -2,9 +2,8 @@ package com.pluralsight.models;
 
 public class Chips extends Product{
     String typeOfChips;
-    public Chips(String name, int size, String typeOfSandWish) {
+    public Chips(String name, int size) {
         super(name, size);
-        this.typeOfChips = typeOfChips;
     }
 
     @Override

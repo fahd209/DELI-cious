@@ -3,6 +3,7 @@ package com.pluralsight.ui;
 import com.pluralsight.models.Order;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -47,6 +48,7 @@ public class Ui {
 
     public Order getOrderInformation()
     {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd - hh:mm:ss a");
         System.out.println();
         System.out.print("Enter your name: ");
         String name = userInput.nextLine();
@@ -54,7 +56,7 @@ public class Ui {
         LocalDateTime currentDateTime = LocalDateTime.now();
         int orderNumber = (int) Math.round(Math.random() * 100);
 
-        return new Order(name, orderNumber, currentDateTime);
+        return new Order(name, orderNumber, currentDateTime.format(formatter));
     }
 
     public int getNewOrder()
@@ -67,7 +69,7 @@ public class Ui {
                 System.out.println("[2] - Add drink");
                 System.out.println("[3] - Add Chips");
                 System.out.println("[4] - Check out");
-                System.out.println("[0] - Cancel order");
+                System.out.println("[0] - Cancel order and go back to home screen");
                 System.out.print("Enter input:");
                 choice = Integer.parseInt(userInput.nextLine().strip());
 
@@ -159,6 +161,58 @@ public class Ui {
     {
         System.out.println();
         System.out.println("Do you want to toast your sandwich? (Yes, no)");
+        System.out.println("Enter input:");
         return userInput.nextLine().equalsIgnoreCase("yes");
+    }
+
+    public int getDrinkSize()
+    {
+        System.out.println();
+        System.out.println("What size drink would you like? (S, M, L)");
+        String size = userInput.nextLine().strip();
+        return switch (size.toLowerCase())
+        {
+            case "s" -> 4;
+            case "m" -> 8;
+            case "l" -> 12;
+            default -> throw new IllegalStateException("Unexpected value: " + size.toLowerCase());
+        };
+    }
+
+    public String getDrinkType()
+    {
+        System.out.println();
+        System.out.println("What flavor drink would you like? ");
+        System.out.print("Enter input:");
+        return userInput.nextLine().strip();
+    }
+
+    public String getChipsType()
+    {
+        System.out.println();
+        System.out.println("What type of chips would you like? ");
+        System.out.print("Enter input:");
+        return userInput.nextLine().strip();
+    }
+
+    public int checkOut()
+    {
+        int choice = 0;
+        try {
+            System.out.println();
+            System.out.println("[1] - confirm order");
+            System.out.println("[2] - Cancel order");
+            System.out.println("Enter input: ");
+            choice = Integer.parseInt(userInput.nextLine().strip());
+        }
+        catch (NumberFormatException e)
+        {
+            message("Invalid input, please enter numbers only");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Invalid input, please try again");
+        }
+        return choice;
     }
 }

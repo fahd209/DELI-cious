@@ -2,9 +2,8 @@ package com.pluralsight.models;
 
 public class Drink extends Product{
     String drinkType;
-    public Drink(String name, int size, String drinkType) {
+    public Drink(String name, int size) {
         super(name, size);
-        this.drinkType = drinkType;
     }
 
     @Override
