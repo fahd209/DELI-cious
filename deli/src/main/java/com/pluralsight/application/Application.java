@@ -58,35 +58,40 @@ public class Application {
     }
 
     public void addSandWish(Order order) {
-        // getting type of bread and sandwish size
+
+        // getting type of bread and sandwich size
         String typeOfBread = ui.getTypeOfBread();
         int sandWishSize = ui.getSandWishSize();
 
-        // getting type of meat
+        // getting type of meat from ui
         String[] meat = ui.getSandWishMeat();
-        Sandwish sandwish = new Sandwish(meat[0] + "Sandwish", sandWishSize, typeOfBread);
+        Sandwich sandwish = new Sandwich(meat[0] + "Sandwich", sandWishSize, typeOfBread);
         addMeat(sandwish, meat);
 
-        // getting sandWish Cheese
+        // getting sandwich Cheese from ui
         String[] cheese =  ui.getSandWishCheese();
         addCheese(sandwish, cheese);
 
-        //getting regular topping
+        //getting regular topping from ui
         String[] regularToppings = ui.getRegularTopping();
         addRegularTopping(sandwish,regularToppings);
 
+        //getting sauces for ui
         String[] sauces = ui.getSauces();
         addToppings(sandwish, sauces);
+
+        // checking if the sandwich is toasted from ui
+        sandwish.setToasted(ui.isSandwichToasted());
 
         ArrayList<Toppings> toppings = sandwish.getToppings();
 
         for (Toppings topping : toppings)
         {
-            System.out.printf(" %s - %.2f ", topping.getType(), topping.getPrice());
+            System.out.printf(" %s - %.2f \n", topping.getType(), topping.getPrice());
         }
     }
 
-    public void addMeat(Sandwish sandwish, String[] meat)
+    public void addMeat(Sandwich sandwish, String[] meat)
     {
         // checking topping are extra and adding them to the sandwich
         for (int i = 0; i < meat.length; i++)
@@ -103,7 +108,7 @@ public class Application {
         }
     }
 
-    public void addCheese(Sandwish sandwish, String[] cheese)
+    public void addCheese(Sandwich sandwich, String[] cheese)
     {
         // checking if she is extra and adding it to the sandwich
         for (int i = 0; i < cheese.length; i++)
@@ -111,16 +116,16 @@ public class Application {
             Toppings meatTopping;
             if (i < 1)
             {
-                meatTopping = new PremiumTopping(cheese[i], sandwish.getSize(), false, true, false, false);
+                meatTopping = new PremiumTopping(cheese[i], sandwich.getSize(), false, true, false, false);
             }
             else {
-                meatTopping = new PremiumTopping(cheese[i], sandwish.getSize(), false, false, true, false);
+                meatTopping = new PremiumTopping(cheese[i], sandwich.getSize(), false, false, true, false);
             }
-            sandwish.addTopping(meatTopping);
+            sandwich.addTopping(meatTopping);
         }
     }
 
-    public void addRegularTopping(Sandwish sandwish, String[] regularToppings)
+    public void addRegularTopping(Sandwich sandwish, String[] regularToppings)
     {
         for (int i = 0; i < regularToppings.length; i++)
         {
@@ -129,7 +134,7 @@ public class Application {
         }
     }
 
-    public void addToppings(Sandwish sandwish, String[] sauces)
+    public void addToppings(Sandwich sandwish, String[] sauces)
     {
         for (int i = 0; i < sauces.length; i++)
         {

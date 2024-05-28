@@ -154,4 +154,11 @@ public class Ui {
         System.out.print("Sauces:");
         return userInput.nextLine().strip().replace(" ", "").split(",");
     }
+
+    public boolean isSandwichToasted()
+    {
+        System.out.println();
+        System.out.println("Do you want to toast your sandwich? (Yes, no)");
+        return userInput.nextLine().equalsIgnoreCase("yes");
+    }
 }

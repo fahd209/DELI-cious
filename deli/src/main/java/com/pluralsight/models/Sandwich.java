@@ -2,13 +2,13 @@ package com.pluralsight.models;
 
 import java.util.ArrayList;
 
-public class Sandwish extends Product{
+public class Sandwich extends Product{
     String typeOfBread;
     boolean isToasted;
     ArrayList<Toppings> toppings = new ArrayList<>();
     double price;
 
-    public Sandwish(String name, int size, String typeOfBread) {
+    public Sandwich(String name, int size, String typeOfBread) {
         super(name, size);
     }
 

@@ -9,3 +9,46 @@ I built a deli application that would work on any store or restraunt. The deli a
 ![structureOfTopping](images/toppingBaseStructure.png)
 
 * Topping class will have two childern classes. One class named regularTopping and another named premiumToppings. The regular topping will be included with the order, so the customer won't get charged for regular toppings. However the premium topping class will handle if the topping is meat, cheese, extra meat, or extra cheese and charge the user extra based on the sandwish size.
+
+## New Order List menu
+![new order list menu](images/newOrderListMenu.png)
+
+### add sandwich
+* Once the user selects add sandwich ("1"). The user will get prompted for the type of bread, meat, cheese, regular topping, sauces, and weither if the sandwich is toasted or not. Once the user enters the meat and cheese toppings, it will charge the user based on weither these topping are extra or not. It will make a object topping for regular and premium based on the topping and then it will get added to sandwich arrayList of toppings.
+
+Getting 
+```java
+public void addSandWish(Order order) {
+
+        // getting type of bread and sandwich size
+        String typeOfBread = ui.getTypeOfBread();
+        int sandWishSize = ui.getSandWishSize();
+
+        // getting type of meat from ui
+        String[] meat = ui.getSandWishMeat();
+        Sandwich sandwish = new Sandwich(meat[0] + "Sandwich", sandWishSize, typeOfBread);
+        addMeat(sandwish, meat);
+
+        // getting sandwich Cheese from ui
+        String[] cheese =  ui.getSandWishCheese();
+        addCheese(sandwish, cheese);
+
+        //getting regular topping from ui
+        String[] regularToppings = ui.getRegularTopping();
+        addRegularTopping(sandwish,regularToppings);
+
+        //getting sauces for ui
+        String[] sauces = ui.getSauces();
+        addToppings(sandwish, sauces);
+
+        // checking if the sandwich is toasted from ui
+        sandwish.setToasted(ui.isSandwichToasted());
+
+        ArrayList<Toppings> toppings = sandwish.getToppings();
+
+        for (Toppings topping : toppings)
+        {
+            System.out.printf(" %s - %.2f \n", topping.getType(), topping.getPrice());
+        }
+    }
+```
