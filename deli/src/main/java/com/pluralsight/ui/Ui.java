@@ -20,10 +20,10 @@ public class Ui {
         while (choice != 0) {
             try {
                 System.out.println();
-                System.out.println("      Welcome to the bay Area's deli     ");
+                System.out.println(Colors.CYAN+"      Welcome to the bay Area's deli     "+Colors.RESET);
                 System.out.println("*****************************************");
-                System.out.println("[1] - New order");
-                System.out.println("[0] - Exit");
+                System.out.println(Colors.CYAN+"[1]" + Colors.BLACK + " - New order"+ Colors.RESET);
+                System.out.println(Colors.RED +"[0]"+Colors.BLACK +" - Exit"+Colors.RESET);
                 System.out.print("Enter input:");
                 choice = Integer.parseInt(userInput.nextLine().strip());
                 switch (choice) {
@@ -65,11 +65,11 @@ public class Ui {
         while (choice != 0) {
             try {
                 System.out.println();
-                System.out.println("[1] - Add sandwich");
-                System.out.println("[2] - Add drink");
-                System.out.println("[3] - Add Chips");
-                System.out.println("[4] - Check out");
-                System.out.println("[0] - Cancel order and go back to home screen");
+                System.out.println(Colors.CYAN+"[1]"+Colors.BLACK+" - Add sandwich"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[2]"+Colors.BLACK+" - Add drink"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[3]"+Colors.BLACK+" - Add Chips"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[4]"+Colors.BLACK+" - Check out"+Colors.RESET);
+                System.out.println(Colors.RED+"[0]"+Colors.BLACK+" - Cancel order and go back to home screen"+Colors.RESET);
                 System.out.print("Enter input:");
                 choice = Integer.parseInt(userInput.nextLine().strip());
 
@@ -108,7 +108,7 @@ public class Ui {
             System.out.println();
             System.out.println("what sandwich size would you like? (4inch, 8inch, 12inch) ");
             System.out.print("Enter input: ");
-            size = Integer.parseInt(userInput.nextLine().strip());
+            size = Integer.parseInt(userInput.nextLine().strip().replace("inch", ""));
         }
         catch (InputMismatchException | NumberFormatException e)
         {
@@ -167,16 +167,16 @@ public class Ui {
 
     public int getDrinkSize()
     {
-        System.out.println();
-        System.out.println("What size drink would you like? (S, M, L)");
-        String size = userInput.nextLine().strip();
-        return switch (size.toLowerCase())
-        {
-            case "s" -> 4;
-            case "m" -> 8;
-            case "l" -> 12;
-            default -> throw new IllegalStateException("Unexpected value: " + size.toLowerCase());
-        };
+            System.out.println();
+            System.out.println("What size drink would you like? (S, M, L)");
+            System.out.print("Enter input: ");
+            String size = userInput.nextLine().strip();
+            return switch (size.toLowerCase()) {
+                case "s" -> 4;
+                case "m" -> 8;
+                case "l" -> 12;
+                default -> throw new IllegalStateException("Unexpected value: " + size.toLowerCase());
+            };
     }
 
     public String getDrinkType()

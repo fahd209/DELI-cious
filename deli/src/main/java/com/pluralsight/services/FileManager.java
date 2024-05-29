@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class FileManager {
     public static void saveReceipt(Order order)
     {
-        String receiptDate = order.getOrderDate().replace(" ", "");
+        String receiptDate = order.getOrderDate().replace(" ", "").replace(":", "-");
         File file = new File("receipts\\"+receiptDate+".txt");
 
         try(
@@ -23,8 +23,8 @@ public class FileManager {
             ArrayList<Product> products = order.getOrder();
             writer.printf("Customer: %-10s\n", order.getCustomerName());
             writer.printf("Date: %-10s\n", order.getOrderDate());
-            writer.printf("Order number: %d ", order.getOrderNumber());
-            writer.printf("------------------------------------------");
+            writer.printf("Order number: %d \n", order.getOrderNumber());
+            writer.println("------------------------------------------");
 
             for (Product product : products)
             {
@@ -53,6 +53,7 @@ public class FileManager {
         }
         catch (IOException e)
         {
+            System.out.println(e.getMessage());
             System.out.println("File does not exist");
         }
         catch (Exception e)

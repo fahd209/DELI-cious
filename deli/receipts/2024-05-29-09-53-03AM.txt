@@ -1,0 +1,13 @@
+Customer: fahd      
+Date: 2024-05-29 - 09:53:03 AM
+Order number: 2
+------------------------------------------
+8 inch white bread, turkey Sandwich Toasted : $7.00
+turkey                   : $2.00      
+american cheese          : $1.50      
+Extra provolone cheese   : $0.60      
+lettuce                  : $0.00      
+onions                   : $0.00      
+mayo                     : $0.00      
+mustard                  : $0.00      
+Total: $11.10

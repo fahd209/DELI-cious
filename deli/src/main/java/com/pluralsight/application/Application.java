@@ -2,6 +2,7 @@ package com.pluralsight.application;
 
 import com.pluralsight.models.*;
 import com.pluralsight.services.FileManager;
+import com.pluralsight.ui.Colors;
 import com.pluralsight.ui.Ui;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class Application {
                     break;
                 case 4:
                     checkOut(newOrder);
-                    break;
+                    return;
                 case 0:
                     System.out.println("Canceling order");
                     break;
@@ -126,6 +127,7 @@ public class Application {
 
     public void addRegularTopping(Sandwich sandwich, String[] regularToppings)
     {
+        // adding regular toppings
         for (int i = 0; i < regularToppings.length; i++)
         {
             Toppings toppings = new RegularToppings(regularToppings[i]);
@@ -135,6 +137,7 @@ public class Application {
 
     public void addSauces(Sandwich sandwich, String[] sauces)
     {
+        // adding sauces to sandwich
         for (int i = 0; i < sauces.length; i++)
         {
             Toppings toppings = new RegularToppings(sauces[i]);
@@ -144,6 +147,7 @@ public class Application {
 
     public void addDrink(Order order)
     {
+        // adding drink
         int size = ui.getDrinkSize();
         String typeOfDrink = ui.getDrinkType();
 
@@ -153,6 +157,7 @@ public class Application {
 
     public void addChips(Order order)
     {
+        // adding chips
         String typeOfChips = ui.getChipsType();
         Product chips = new Chips(typeOfChips, 0);
         order.addProduct(chips);
@@ -177,6 +182,8 @@ public class Application {
     {
         ArrayList<Product> products = order.getOrder();
         System.out.println();
+        System.out.println(Colors.YELLOW + "***Bay Area's Deli***"+Colors.RESET);
+        System.out.println("-----------------------------------------");
         System.out.printf("Customer: %-10s\n", order.getCustomerName());
         System.out.printf("Date: %-10s\n", order.getOrderDate());
         System.out.printf("Order number: %d \n", order.getOrderNumber());
@@ -219,7 +226,8 @@ public class Application {
 
     public void cancelOrder(Order order)
     {
-
+        System.out.println();
+        System.out.println("Order has been canceled");
     }
 
     public static String convertDrinkSize(int size)

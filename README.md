@@ -16,7 +16,8 @@ I built a deli application that would work on any store or restraunt. The deli a
 ### add sandwich
 * Once the user selects add sandwich ("1"). The user will get prompted for the type of bread, meat, cheese, regular topping, sauces, and weither if the sandwich is toasted or not. Once the user enters the meat and cheese toppings, it will charge the user based on weither these topping are extra or not. It will make a object topping for regular and premium based on the topping and then it will get added to sandwich arrayList of toppings.
 
-Getting 
+Getting sandwich
+
 ```java
 public void addSandWish(Order order) {
 
@@ -56,3 +57,7 @@ public void addSandWish(Order order) {
 * Once the user enter's ("2"). The user will prompted for drink size and type. The program will then make a product object type of drink. Then it will be added to the order's products.
 
 * Once the user enter's ("3"). To add a chips to they're order. They will be prompted for the chips type then it will be added to the orders product arrayList. 
+
+* Once the user enter's ("4") to checkout. The receipt will be printed out and the user will have the option to cancel the order or confirm it. If The user confrims the receipt will get saved to receipts directory.
+
+![checkout](images/checkOut.png)
