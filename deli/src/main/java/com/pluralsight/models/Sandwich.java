@@ -87,6 +87,11 @@ public class Sandwich extends Product{
     @Override
     public double getPrice()
     {
-        return 0;
+        double toppingTotal = 0;
+        for (Toppings topping : getToppings())
+        {
+            toppingTotal += topping.getPrice();
+        }
+        return toppingTotal + getBreadPrice();
     }
 }

@@ -1,6 +1,7 @@
 package com.pluralsight.application;
 
 import com.pluralsight.models.*;
+import com.pluralsight.services.FileManager;
 import com.pluralsight.ui.Ui;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class Application {
 
         // getting type of meat from ui
         String[] meat = ui.getSandWishMeat();
-        Sandwich sandwich = new Sandwich(meat[0] + "Sandwich", sandWishSize, typeOfBread);
+        Sandwich sandwich = new Sandwich(meat[0] + " Sandwich", sandWishSize, typeOfBread);
         addMeat(sandwich, meat);
 
         // getting sandwich Cheese from ui
@@ -177,37 +178,43 @@ public class Application {
         ArrayList<Product> products = order.getOrder();
         System.out.println();
         System.out.printf("Customer: %-10s\n", order.getCustomerName());
-        System.out.println("------------------------------------------");
         System.out.printf("Date: %-10s\n", order.getOrderDate());
+        System.out.printf("Order number: %d \n", order.getOrderNumber());
+        System.out.println("------------------------------------------");
 
         for (Product product : products)
         {
             if (product instanceof Sandwich)
             {
-                System.out.printf("%d inch %s bread, %s\n", product.getSize(), ((Sandwich) product).getTypeOfBread(), product.getName());
+                String toasted = ((Sandwich) product).isToasted() ? "Toasted" : "Not toasted";
+                System.out.printf("%d inch %s bread, %s %s : $%.2f  \n", product.getSize(), ((Sandwich) product).getTypeOfBread(), product.getName(),toasted , ((Sandwich) product).getBreadPrice());
                 ArrayList<Toppings> toppings = ((Sandwich) product).getToppings();
                 for (Toppings topping : toppings)
                 {
-                    System.out.printf("%-10s: %-10.2f\n", topping.getType(), product.getPrice());
+                    System.out.printf("%-25s: $%-10.2f\n", topping.getType(), topping.getPrice());
                 }
             }
             else if (product instanceof Drink)
             {
                 // getting drinks size
-                String size = getDrinksSize(product.getSize());
+                String size = convertDrinkSize(product.getSize());
 
-                System.out.printf("%s %-10s %-10.2f\n", size, product.getName(), product.getPrice());
+                System.out.printf("%s %-25s %-20.2f\n", size, product.getName(), product.getPrice());
             }
             else
             {
-                System.out.printf("%-10s %-10.2f\n", product.getName(), product.getPrice());
+                System.out.printf("%-25s %-20.2f\n", product.getName(), product.getPrice());
             }
         }
+        System.out.printf("Total: $%.2f", order.getTotal());
+        System.out.println();
     }
 
     public void confirmOrder(Order order)
     {
-
+        System.out.println();
+        FileManager.saveReceipt(order);
+        System.out.println("Order number " + order.getOrderNumber() + " has been conformed, Enjoy :)");
     }
 
     public void cancelOrder(Order order)
@@ -215,7 +222,7 @@ public class Application {
 
     }
 
-    public String getDrinksSize(int size)
+    public static String convertDrinkSize(int size)
     {
         return switch (size)
         {

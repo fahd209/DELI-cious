@@ -53,4 +53,14 @@ public class Order {
     {
         order.add(product);
     }
+
+    public double getTotal()
+    {
+        double orderTotal = 0;
+        for (Product product : getOrder())
+        {
+            orderTotal += product.getPrice();
+        }
+        return orderTotal;
+    }
 }

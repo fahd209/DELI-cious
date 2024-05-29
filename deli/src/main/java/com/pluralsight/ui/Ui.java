@@ -161,7 +161,7 @@ public class Ui {
     {
         System.out.println();
         System.out.println("Do you want to toast your sandwich? (Yes, no)");
-        System.out.println("Enter input:");
+        System.out.print("Enter input:");
         return userInput.nextLine().equalsIgnoreCase("yes");
     }
 
@@ -202,7 +202,7 @@ public class Ui {
             System.out.println();
             System.out.println("[1] - confirm order");
             System.out.println("[2] - Cancel order");
-            System.out.println("Enter input: ");
+            System.out.print("Enter input: ");
             choice = Integer.parseInt(userInput.nextLine().strip());
         }
         catch (NumberFormatException e)
