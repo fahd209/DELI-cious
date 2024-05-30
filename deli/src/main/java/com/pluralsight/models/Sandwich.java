@@ -47,6 +47,11 @@ public class Sandwich extends Product{
         toppings.add(topping);
     }
 
+    public void removeTopping(Toppings topping)
+    {
+        toppings.remove(topping);
+    }
+
     public double getBreadPrice()
     {
         double breadPrice = 0;

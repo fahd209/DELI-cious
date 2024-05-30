@@ -3,8 +3,6 @@ package com.pluralsight.models;
 import java.util.ArrayList;
 
 public class SignatureSandwich extends Sandwich{
-    ArrayList<String> BltToppings = new ArrayList<>();
-    ArrayList<String> phillyCheeseSteakTopping = new ArrayList<>();
     ArrayList<Toppings> toppings = new ArrayList<>();
     public SignatureSandwich(String name, int size, String typeOfBread) {
         super(name, size, typeOfBread);
@@ -17,8 +15,8 @@ public class SignatureSandwich extends Sandwich{
         toppings.add(new PremiumTopping("Bacon", getSize(), true, false, false, false));
         toppings.add(new PremiumTopping("Cheddar cheese", getSize(), false, true, false, false));
         toppings.add(new RegularToppings("Lettuce"));
-        toppings.add(new RegularToppings("Cheddar cheese"));
-        toppings.add(new RegularToppings("Cheddar cheese"));
+        toppings.add(new RegularToppings("Tomato"));
+        toppings.add(new RegularToppings("ranch"));
         return toppings;
     }
 

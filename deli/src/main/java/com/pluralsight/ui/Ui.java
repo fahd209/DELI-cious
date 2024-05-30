@@ -126,38 +126,42 @@ public class Ui {
         return size;
     }
 
-    public String[] getSandWishMeat()
+    public String getSandWishMeat()
     {
         System.out.println();
         System.out.println("Note: Any extra topping that's cheese or meat will be charged as extra");
         System.out.println("Enter your topping in this format -> Meat:Turkey, Chicken");
         System.out.println("(Turkey, chicken, roast beef, bacon, salami, steak, ham)");
+        System.out.println("Enter 'none' if you don't want any of those toppings");
         System.out.print("Meat:");
-        return userInput.nextLine().strip().replace(" ", "").split(",");
+        return userInput.nextLine().strip().replace(" ", "");
     }
 
-    public String[] getSandWishCheese()
+    public String getSandWishCheese()
     {
         System.out.println();
         System.out.println("(American, provolone, swiss, cheddar)");
+        System.out.println("Enter 'none' if you don't want any of those toppings");
         System.out.print("Cheese:");
-        return userInput.nextLine().strip().replace(" ", "").split(",");
+        return userInput.nextLine().strip().replace(" ", "");
     }
 
-    public String[] getRegularTopping()
+    public String getRegularTopping()
     {
         System.out.println();
         System.out.println("(Lettuce, Tomatoes, Onions, jalapenos, cucumber, pickles, guacamole, mushrooms, peppers)");
+        System.out.println("Enter 'none' if you don't want any of those toppings");
         System.out.print("Veggies:");
-        return userInput.nextLine().strip().replace(" ", "").split(",");
+        return userInput.nextLine().strip().replace(" ", "");
     }
 
-    public String[] getSauces()
+    public String getSauces()
     {
         System.out.println();
         System.out.println("(Mayo, mustard, ketchup, ranch, thousand island, vinaigrette)");
+        System.out.println("Enter 'none' if you don't want any of those toppings");
         System.out.print("Sauces:");
-        return userInput.nextLine().strip().replace(" ", "").split(",");
+        return userInput.nextLine().strip().replace(" ", "");
     }
 
     public boolean isSandwichToasted()
@@ -253,28 +257,19 @@ public class Ui {
         return userInput.nextLine();
     }
 
-    public ArrayList<Integer> removeToppings()
+    public String removeToppings()
     {
         System.out.println();
-        System.out.println("Enter the toppings you want to remove in this format -> (2,5,3)");
-        System.out.print("Enter input");
-        String[] optionsSelected = (userInput.nextLine().replace(" ", "").split(","));
-        ArrayList<Integer> option = new ArrayList<>();
-
-        // looping through the option selected and converting them to integers
-        for (int i = 0; i < optionsSelected.length; i++)
-        {
-            int num = Integer.parseInt(optionsSelected[i]);
-            option.add(num);
-        }
-        return option;
+        System.out.println("Enter the toppings name you would like to remove");
+        System.out.print("Enter input:");
+        return userInput.nextLine().strip();
     }
 
     public String addToppingOrNot()
     {
         System.out.println();
         System.out.println("Would you like to add toppings? (Yes, No)");
-        System.out.println("Enter input: ");
+        System.out.print("Enter input: ");
         return userInput.nextLine();
     }
 }

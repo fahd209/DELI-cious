@@ -1,0 +1,9 @@
+Customer: fahd      
+Date: 2024-05-30 - 12:21:45 PM
+Order number: 88 
+------------------------------------------
+4 inch white bread,  Not toasted : $5.50  
+american cheese          : $0.75      
+lettuce                  : $0.00      
+mayo                     : $0.00      
+Total: $6.25

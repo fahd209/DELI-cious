@@ -1,0 +1,10 @@
+Customer: fahd      
+Date: 2024-05-30 - 12:17:52 PM
+Order number: 81 
+------------------------------------------
+4 inch white bread, turkey sandwich Not toasted : $5.50  
+turkey                   : $1.00      
+Extra chicken            : $0.50      
+lettuce                  : $0.00      
+onions                   : $0.00      
+Total: $7.00

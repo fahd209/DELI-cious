@@ -6,6 +6,7 @@ import com.pluralsight.ui.Colors;
 import com.pluralsight.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Application {
     Ui ui = new Ui();
@@ -67,23 +68,38 @@ public class Application {
         // getting type of bread and sandwich size
         String typeOfBread = ui.getTypeOfBread();
         int sandWishSize = ui.getSandWishSize();
+        Sandwich sandwich = new Sandwich("", sandWishSize, typeOfBread);
 
         // getting type of meat from ui
-        String[] meat = ui.getSandWishMeat();
-        Sandwich sandwich = new Sandwich(meat[0] + " Sandwich", sandWishSize, typeOfBread);
-        addMeat(sandwich, meat);
+        String meatInput = ui.getSandWishMeat();
+        if (!meatInput.equalsIgnoreCase("none")) {
+            String[] meat = convertToppingInputToArray(meatInput);
+            sandwich.setName(meat[0]+" sandwich");
+            addMeat(sandwich, meat);
+        }
 
         // getting sandwich Cheese from ui
-        String[] cheese =  ui.getSandWishCheese();
-        addCheese(sandwich, cheese);
+        String cheeseInput =  ui.getSandWishCheese();
+        if (!cheeseInput.equalsIgnoreCase("none")) {
+            String[] cheese = convertToppingInputToArray(cheeseInput);
+            addCheese(sandwich, cheese);
+        }
 
         //getting regular topping from ui
-        String[] regularToppings = ui.getRegularTopping();
-        addRegularTopping(sandwich,regularToppings);
+        String regularToppingsInput = ui.getRegularTopping();
+        if (!regularToppingsInput.equalsIgnoreCase("none"))
+        {
+            String[] regularToppings = convertToppingInputToArray(regularToppingsInput);
+            addRegularTopping(sandwich,regularToppings);
+        }
+
 
         //getting sauces for ui
-        String[] sauces = ui.getSauces();
-        addSauces(sandwich, sauces);
+        String saucesInput = ui.getSauces();
+        if (!saucesInput.equalsIgnoreCase("none")) {
+            String[] sauces = convertToppingInputToArray(saucesInput);
+            addSauces(sandwich, sauces);
+        }
 
         // checking if the sandwich is toasted from ui
         sandwich.setToasted(ui.isSandwichToasted());
@@ -174,7 +190,7 @@ public class Application {
                 confirmOrder(order);
                 break;
             case 2:
-                cancelOrder(order);
+                cancelOrder();
                 break;
         }
     }
@@ -224,14 +240,14 @@ public class Application {
         // saving order to file
         System.out.println();
         FileManager.saveReceipt(order);
-        System.out.println("Order number " + order.getOrderNumber() + " has been conformed, Enjoy :)");
+        System.out.println(Colors.GREEN + order.getOrderNumber() + " has been conformed, Enjoy :)"+Colors.RESET);
     }
 
-    public void cancelOrder(Order order)
+    public void cancelOrder()
     {
         // canceling order
         System.out.println();
-        System.out.println("Order has been canceled");
+        System.out.println(Colors.RED+"Order has been canceled"+Colors.RESET);
     }
 
     public static String convertDrinkSize(int size)
@@ -265,40 +281,64 @@ public class Application {
     {
         // creating signature sandwich
         Sandwich Blt = new SignatureSandwich("BLT", 8, "White");
-        String removeToppingOrNot = ui.printSandwichToppings(Blt.getToppings()); //<== array list topping to the function so i could get displayed
+        String removeToppingOrNot = ui.printSandwichToppings(Blt.getToppings()); //<== passing array list topping to the function, so I could get displayed
+        ArrayList<Toppings> bltToppings = Blt.getToppings();
 
         // checking if user wants to remove any toppings
-        if (removeToppingOrNot.equalsIgnoreCase("yes"))
+        while (removeToppingOrNot.equalsIgnoreCase("yes"))
         {
             // getting the toppings the user wants to remove
-            ArrayList<Integer> toppingsToRemove = ui.removeToppings();
+            String toppingName = ui.removeToppings();
+            Toppings toppingToRemove = null;
 
-            // looping through them toppings picked and sandwich toppings
-            for (int i = 0; i < toppingsToRemove.size(); i++)
+            // looping through toppings
+            for (Toppings topping : bltToppings)
             {
-                for (int j = 0; j < Blt.getToppings().size(); j++)
+                // checking if user's topping picked is in the sandwich topping
+                if (topping.getType().equalsIgnoreCase(toppingName))
                 {
-                    //checking if the index is the same
-                    if (toppingsToRemove.get(i) == j)
-                    {
-                        // removing toppings
-                        Blt.getToppings().remove(Blt.getToppings().get(j));
-                    }
+                    // removing topping
+                    toppingToRemove = topping;
+                    break;
                 }
             }
+            Blt.removeTopping(toppingToRemove);
+
+            // asking user if they still want to remove more toppings to break out the loop
+            removeToppingOrNot = ui.printSandwichToppings(Blt.getToppings());
         }
 
         // checking if the user wants extra toppings
         String addToppingsOrNot = ui.addToppingOrNot();
         if (addToppingsOrNot.equalsIgnoreCase("yes"))
         {
-            // getting all the toppings
-            String[] meat = ui.getSandWishMeat();
-            addMeatToSignatureSandwich(Blt, meat);
+            String meatInput = ui.getSandWishMeat();
+            if (!meatInput.equalsIgnoreCase("none"))
+            {
+                String[] meat = convertToppingInputToArray(meatInput);
+                addMeatToSignatureSandwich(Blt, meat);
+            }
 
-            String[] cheese = ui.getSandWishCheese();
-            String[] regularToppings = ui.getRegularTopping();
-            String[] sauces = ui.getSauces();
+            String cheeseInput = ui.getSandWishCheese();
+            if (!cheeseInput.equalsIgnoreCase("none"))
+            {
+                String[] cheese = convertToppingInputToArray(cheeseInput);
+                addCheeseToSignatureSandwich(Blt, cheese);
+            }
+
+            String regularToppingsInput = ui.getRegularTopping();
+            if (!regularToppingsInput.equalsIgnoreCase("none"))
+            {
+                String[] regularToppings = convertToppingInputToArray(regularToppingsInput);
+                addRegularToppingsToSignatureSandwich(Blt, regularToppings);
+            }
+
+            String saucesInput = ui.getSauces();
+            if (saucesInput.equalsIgnoreCase("none"))
+            {
+                String[] sauces = convertToppingInputToArray(saucesInput);
+                addRegularSaucesToSignatureSandwich(Blt, sauces);
+            }
         }
         order.addProduct(Blt);
     }
@@ -307,24 +347,80 @@ public class Application {
     {
         Sandwich phillyCheeseSteak = new SignatureSandwich("Philly cheese steak", 8, "White");
         String removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
+        ArrayList<Toppings> phillyCheeseSteakToppings = phillyCheeseSteak.getToppings();
+
+        while (removeToppingOrNot.equalsIgnoreCase("yes"))
+        {
+            // getting the toppings the user wants to remove
+            String toppingName = ui.removeToppings();
+            Toppings toppingToRemove = null;
+
+            // looping through toppings
+            for (Toppings topping : phillyCheeseSteakToppings)
+            {
+                // checking if user's topping picked is in the sandwich topping
+                if (topping.getType().equalsIgnoreCase(toppingName))
+                {
+                    // removing topping
+                    toppingToRemove = topping;
+                    break;
+                }
+            }
+            phillyCheeseSteak.removeTopping(toppingToRemove);
+
+            // asking user if they still want to remove more toppings to break out the loop
+            removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
+
+            // checking if the user wants extra toppings
+            String addToppingsOrNot = ui.addToppingOrNot();
+            if (addToppingsOrNot.equalsIgnoreCase("yes"))
+            {
+                // getting all the toppings
+                String meatInput = ui.getSandWishMeat();
+                if (!meatInput.equalsIgnoreCase("none"))
+                {
+                    String[] meat = convertToppingInputToArray(meatInput);
+                    addMeatToSignatureSandwich(phillyCheeseSteak, meat);
+                }
+
+                String cheeseInput = ui.getSandWishCheese();
+                if (!cheeseInput.equalsIgnoreCase("none"))
+                {
+                    String[] cheese = convertToppingInputToArray(cheeseInput);
+                    addCheeseToSignatureSandwich(phillyCheeseSteak, cheese);
+                }
+
+                String regularToppingsInput = ui.getRegularTopping();
+                if (!regularToppingsInput.equalsIgnoreCase("none"))
+                {
+                    String[] regularToppings = convertToppingInputToArray(regularToppingsInput);
+                    addRegularToppingsToSignatureSandwich(phillyCheeseSteak, regularToppings);
+                }
+
+                String saucesInput = ui.getSauces();
+                if (saucesInput.equalsIgnoreCase("none"))
+                {
+                    String[] sauces = convertToppingInputToArray(saucesInput);
+                    addRegularSaucesToSignatureSandwich(phillyCheeseSteak, sauces);
+                }
+            }
+            order.addProduct(phillyCheeseSteak);
+        }
     }
 
     public void addMeatToSignatureSandwich(Sandwich sandwich, String[] meat)
     {
-        for (int i = 0; i < meat.length; i++)
-        {
-            // checking if the sandwich has meat if it does then meat[i] will be extra
+        // looping through the topping
+        Arrays.stream(meat).forEach(m -> {
+            // checking if sandwich already has meat
             boolean hasMeat = hasMeat(sandwich);
-            if (hasMeat)
-            {
-                sandwich.addTopping(new PremiumTopping(meat[i], sandwich.getSize(), false, false, false, true));
+            // if it does then it will be extra
+            if (hasMeat) {
+                sandwich.addTopping(new PremiumTopping("Extra "+m, sandwich.getSize(), false, false, false, true));
+            } else {
+                sandwich.addTopping(new PremiumTopping(m, sandwich.getSize(), true, false, false, false));
             }
-            else
-            {
-                sandwich.addTopping(new PremiumTopping(meat[i], sandwich.getSize(), true, false, false, false));
-            }
-        }
-
+        });
     }
 
     public boolean hasMeat(Sandwich sandwich)
@@ -342,5 +438,60 @@ public class Application {
             }
         }
         return hasMeat;
+    }
+
+    public void addCheeseToSignatureSandwich(Sandwich sandwich, String[] cheese)
+    {
+        Arrays.stream(cheese).forEach(c -> {
+            // checking if sandwich already has cheese
+            boolean hasCheese = hasCheese(sandwich);
+            // if it does then it will be extra
+            if (hasCheese) {
+                sandwich.addTopping(new PremiumTopping("Extra "+c, sandwich.getSize(), false, false, true, false));
+            } else {
+                sandwich.addTopping(new PremiumTopping(c, sandwich.getSize(), false, true, false, false));
+            }
+        });
+    }
+
+    public boolean hasCheese(Sandwich sandwich)
+    {
+        boolean hasCheese = false;
+        ArrayList<Toppings> toppings = sandwich.getToppings();
+        // looping through the sandwich topping
+        for (Toppings topping : toppings)
+        {
+            // checking if it has cheese
+            if (topping instanceof PremiumTopping && ((PremiumTopping) topping).isCheese())
+            {
+                // setting has cheese to true
+                hasCheese = true;
+                break;
+            }
+        }
+        return hasCheese;
+    }
+
+    public void addRegularToppingsToSignatureSandwich(Sandwich sandwich, String[] regularToppings)
+    {
+        for (int i = 0; i < regularToppings.length; i++)
+        {
+            Toppings topping = new RegularToppings(regularToppings[i]);
+            sandwich.addTopping(topping);
+        }
+    }
+
+    public void addRegularSaucesToSignatureSandwich(Sandwich sandwich, String[] sauces)
+    {
+        for (int i = 0; i < sauces.length; i++)
+        {
+            Toppings topping = new RegularToppings(sauces[i]);
+            sandwich.addTopping(topping);
+        }
+    }
+
+    public String[] convertToppingInputToArray(String toppings)
+    {
+        return toppings.split(",");
     }
 }
