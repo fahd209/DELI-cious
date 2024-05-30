@@ -96,3 +96,9 @@ Sandwich phillyCheeseSteak = new SignatureSandwich("Philly cheese steak", 8, "Wh
             removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
         }
 ```
+
+![BLT](images/Blt.png)
+
+![checkOutBlt](images/checkOutBlt.png)
+
+## Instructions on how to use the application

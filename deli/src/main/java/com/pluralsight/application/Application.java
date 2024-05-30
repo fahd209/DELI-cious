@@ -32,7 +32,6 @@ public class Application {
         }
     }
 
-
     private void makeNewOrder() {
         Order newOrder = ui.getOrderInformation();
         int choice = 6;
