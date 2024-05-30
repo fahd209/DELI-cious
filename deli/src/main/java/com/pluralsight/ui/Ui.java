@@ -129,10 +129,10 @@ public class Ui {
     public String getSandWishMeat()
     {
         System.out.println();
-        System.out.println("Note: Any extra topping that's cheese or meat will be charged as extra");
-        System.out.println("Enter your topping in this format -> Meat:Turkey, Chicken");
+        System.out.println(Colors.YELLOW+"Note: Any extra topping that's cheese or meat will be charged as extra"+Colors.RESET);
+        System.out.println("Enter your topping in this format ->"+Colors.GREEN+" Meat:Turkey, Chicken"+Colors.RESET);
         System.out.println("(Turkey, chicken, roast beef, bacon, salami, steak, ham)");
-        System.out.println("Enter 'none' if you don't want any of those toppings");
+        System.out.println("Enter "+Colors.RED+"'none'"+Colors.RESET+" if you don't want any of those toppings");
         System.out.print("Meat:");
         return userInput.nextLine().strip().replace(" ", "");
     }
@@ -141,7 +141,7 @@ public class Ui {
     {
         System.out.println();
         System.out.println("(American, provolone, swiss, cheddar)");
-        System.out.println("Enter 'none' if you don't want any of those toppings");
+        System.out.println("Enter "+Colors.RED+"'none'"+Colors.RESET+" if you don't want any of those toppings");
         System.out.print("Cheese:");
         return userInput.nextLine().strip().replace(" ", "");
     }
@@ -150,7 +150,7 @@ public class Ui {
     {
         System.out.println();
         System.out.println("(Lettuce, Tomatoes, Onions, jalapenos, cucumber, pickles, guacamole, mushrooms, peppers)");
-        System.out.println("Enter 'none' if you don't want any of those toppings");
+        System.out.println("Enter "+Colors.RED+"'none'"+Colors.RESET+" if you don't want any of those toppings");
         System.out.print("Veggies:");
         return userInput.nextLine().strip().replace(" ", "");
     }
@@ -159,7 +159,7 @@ public class Ui {
     {
         System.out.println();
         System.out.println("(Mayo, mustard, ketchup, ranch, thousand island, vinaigrette)");
-        System.out.println("Enter 'none' if you don't want any of those toppings");
+        System.out.println("Enter "+Colors.RED+"'none'"+Colors.RESET+" if you don't want any of those toppings");
         System.out.print("Sauces:");
         return userInput.nextLine().strip().replace(" ", "");
     }
@@ -207,8 +207,8 @@ public class Ui {
         int choice = 0;
         try {
             System.out.println();
-            System.out.println("[1] - Confirm order");
-            System.out.println("[2] - Cancel order");
+            System.out.println(Colors.GREEN+"[1]"+Colors.BLACK+" - Confirm order"+Colors.RESET);
+            System.out.println(Colors.RED+"[2]"+Colors.BLACK+" - Cancel order"+Colors.RESET);
             System.out.print("Enter input: ");
             choice = Integer.parseInt(userInput.nextLine().strip());
         }
@@ -252,6 +252,7 @@ public class Ui {
             Toppings topping = toppings.get(i);
             System.out.println(i+". " + topping.getType());
         }
+        System.out.println();
         System.out.println("Would you like to remove any toppings? (Yes, No)");
         System.out.print("Enter input: ");
         return userInput.nextLine();

@@ -64,3 +64,35 @@ public void addSandWish(Order order) {
 
 ## Signature Sandwiches
 
+![signature order](images/signatureOrder.png)
+
+This part was the hardest part in making this project. Once the user enters ("4"). The program will prompt the user if they want a blt or philly as signature sandwiches. The user will be able to remove toppings and add toppings to the signature sandwiches. I had a signature class the inherts for the sandwich class. The signature class already came with toppings depeings on weither it was a philly cheese steak or a BLT.
+
+This peace of code that I'm really proud was the hardest through out this project. It is responsible for removing the toppings the user selected. At first I was removing the toppings while looping through the array then I realized that was going to bring a lot of issues, so what i did get topping that was what ever the user entered and then removed it outside the loop. Once that was done, the program then prompts the user again if they want to remove any other toppings.
+
+
+```Java
+Sandwich phillyCheeseSteak = new SignatureSandwich("Philly cheese steak", 8, "White");
+        String removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
+        ArrayList<Toppings> phillyCheeseSteakToppings = phillyCheeseSteak.getToppings();
+
+        while (removeToppingOrNot.equalsIgnoreCase("yes")) {
+            // getting the toppings the user wants to remove
+            String toppingName = ui.removeToppings();
+            Toppings toppingToRemove = null;
+
+            // looping through toppings
+            for (Toppings topping : phillyCheeseSteakToppings) {
+                // checking if user's topping picked is in the sandwich topping
+                if (topping.getType().equalsIgnoreCase(toppingName)) {
+                    // removing topping
+                    toppingToRemove = topping;
+                    break;
+                }
+            }
+            phillyCheeseSteak.removeTopping(toppingToRemove);
+
+            // asking user if they still want to remove more toppings to break out the loop
+            removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
+        }
+```

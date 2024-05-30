@@ -199,7 +199,9 @@ public class Application {
     {
         ArrayList<Product> products = order.getOrder();
         System.out.println();
-        System.out.println(Colors.YELLOW + "***Bay Area's Deli***"+Colors.RESET);
+        System.out.println(Colors.YELLOW + "  *********Bay Area's Deli*********  "+Colors.RESET);
+        System.out.println(Colors.CYAN+"  *********(888)-888-8888*********  "+Colors.RESET);
+        System.out.println("6700 Santa Rita Rd, Pleasanton, CA 94588");
         System.out.println("-----------------------------------------");
         System.out.printf("Customer: %-10s\n", order.getCustomerName());
         System.out.printf("Date: %-10s\n", order.getOrderDate());
@@ -224,11 +226,11 @@ public class Application {
                 // getting drinks size
                 String size = convertDrinkSize(product.getSize());
 
-                System.out.printf("%s %-25s %-20.2f\n", size, product.getName(), product.getPrice());
+                System.out.printf("%s %-25s: $%-20.2f\n", size, product.getName(), product.getPrice());
             }
             else
             {
-                System.out.printf("%-25s %-20.2f\n", product.getName(), product.getPrice());
+                System.out.printf("%-25s: $%.2f\n", product.getName(), product.getPrice());
             }
         }
         System.out.printf("Total: $%.2f", order.getTotal());
@@ -349,18 +351,15 @@ public class Application {
         String removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
         ArrayList<Toppings> phillyCheeseSteakToppings = phillyCheeseSteak.getToppings();
 
-        while (removeToppingOrNot.equalsIgnoreCase("yes"))
-        {
+        while (removeToppingOrNot.equalsIgnoreCase("yes")) {
             // getting the toppings the user wants to remove
             String toppingName = ui.removeToppings();
             Toppings toppingToRemove = null;
 
             // looping through toppings
-            for (Toppings topping : phillyCheeseSteakToppings)
-            {
+            for (Toppings topping : phillyCheeseSteakToppings) {
                 // checking if user's topping picked is in the sandwich topping
-                if (topping.getType().equalsIgnoreCase(toppingName))
-                {
+                if (topping.getType().equalsIgnoreCase(toppingName)) {
                     // removing topping
                     toppingToRemove = topping;
                     break;
@@ -370,7 +369,7 @@ public class Application {
 
             // asking user if they still want to remove more toppings to break out the loop
             removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
-
+        }
             // checking if the user wants extra toppings
             String addToppingsOrNot = ui.addToppingOrNot();
             if (addToppingsOrNot.equalsIgnoreCase("yes"))
@@ -398,14 +397,14 @@ public class Application {
                 }
 
                 String saucesInput = ui.getSauces();
-                if (saucesInput.equalsIgnoreCase("none"))
+                if (!saucesInput.equalsIgnoreCase("none"))
                 {
                     String[] sauces = convertToppingInputToArray(saucesInput);
                     addRegularSaucesToSignatureSandwich(phillyCheeseSteak, sauces);
                 }
             }
             order.addProduct(phillyCheeseSteak);
-        }
+
     }
 
     public void addMeatToSignatureSandwich(Sandwich sandwich, String[] meat)

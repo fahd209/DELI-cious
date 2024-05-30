@@ -1,0 +1,21 @@
+Customer: fahd      
+Date: 2024-05-30 - 01:27:31 PM
+Order number: 64 
+------------------------------------------
+12 inch white bread, turkey sandwich Toasted : $8.50  
+turkey                   : $3.00      
+american cheese          : $2.25      
+lettuce                  : $0.00      
+onions                   : $0.00      
+jalapenos                : $0.00      
+mayo                     : $0.00      
+Medium pepsi                     2.50                
+lays                      1.50                
+8 inch White bread, Philly cheese steak Not toasted : $7.00  
+Steak                    : $2.00      
+American cheese          : $1.50      
+Peppers                  : $0.00      
+Mayo                     : $0.00      
+Extra salami             : $1.00      
+Extra american           : $0.60      
+Total: $29.85
