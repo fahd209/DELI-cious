@@ -41,6 +41,7 @@ public class Sandwich extends Product{
         this.price = price;
     }
 
+
     public void addTopping(Toppings topping)
     {
         toppings.add(topping);
@@ -65,24 +66,6 @@ public class Sandwich extends Product{
         return breadPrice;
     }
 
-    public double getMeatPrice()
-    {
-        double meatPrice = 0;
-        switch (getSize())
-        {
-            case 4:
-                meatPrice += 1.00;
-                break;
-            case 8:
-                meatPrice += 2.00;
-                break;
-            case 12:
-                meatPrice += 3.00;
-                break;
-        }
-
-        return meatPrice;
-    }
 
     @Override
     public double getPrice()

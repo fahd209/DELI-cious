@@ -1,9 +1,11 @@
 package com.pluralsight.ui;
 
 import com.pluralsight.models.Order;
+import com.pluralsight.models.Toppings;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -37,10 +39,10 @@ public class Ui {
                 }
             } catch (NumberFormatException e) {
                 System.out.println();
-                message("Invalid input, please enter numbers only");
+                message(Colors.RED+"Invalid input, please enter numbers only"+Colors.RESET);
             } catch (Exception e) {
                 System.out.println();
-                message("Invalid input, please try again");
+                message(Colors.RED+"Invalid input, please try again"+Colors.RESET);
             }
         }
         return 0;
@@ -68,13 +70,14 @@ public class Ui {
                 System.out.println(Colors.CYAN+"[1]"+Colors.BLACK+" - Add sandwich"+Colors.RESET);
                 System.out.println(Colors.CYAN+"[2]"+Colors.BLACK+" - Add drink"+Colors.RESET);
                 System.out.println(Colors.CYAN+"[3]"+Colors.BLACK+" - Add Chips"+Colors.RESET);
-                System.out.println(Colors.CYAN+"[4]"+Colors.BLACK+" - Check out"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[4]"+Colors.BLACK+" - Signature sandwiches"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[5]"+Colors.BLACK+" - Check out"+Colors.RESET);
                 System.out.println(Colors.RED+"[0]"+Colors.BLACK+" - Cancel order and go back to home screen"+Colors.RESET);
                 System.out.print("Enter input:");
                 choice = Integer.parseInt(userInput.nextLine().strip());
 
                 switch (choice) {
-                    case 1, 2, 3, 4:
+                    case 1, 2, 3, 4, 5:
                         return choice;
                     case 0:
                         break;
@@ -84,10 +87,10 @@ public class Ui {
                 }
             } catch (NumberFormatException e) {
                 System.out.println();
-                message("Invalid input, please enter numbers only");
+                message(Colors.RED+"Invalid input, please enter numbers only"+Colors.RESET);
             } catch (Exception e) {
                 System.out.println();
-                message("Invalid input, please try again");
+                message(Colors.RED+"Invalid input, please try again"+Colors.RESET);
             }
         }
         return 0;
@@ -113,12 +116,12 @@ public class Ui {
         catch (InputMismatchException | NumberFormatException e)
         {
             System.out.println();
-            message("Invalid input, please enter your input in numbers only");
+            message(Colors.RED + "Invalid input, please enter your input in numbers only"+ Colors.RESET);
         }
         catch (Exception e)
         {
             System.out.println();
-            message("Something went wrong, please try again");
+            message(Colors.RED +"Something went wrong, please try again"+Colors.RESET);
         }
         return size;
     }
@@ -200,19 +203,78 @@ public class Ui {
         int choice = 0;
         try {
             System.out.println();
-            System.out.println("[1] - confirm order");
+            System.out.println("[1] - Confirm order");
             System.out.println("[2] - Cancel order");
             System.out.print("Enter input: ");
             choice = Integer.parseInt(userInput.nextLine().strip());
         }
         catch (NumberFormatException e)
         {
-            message("Invalid input, please enter numbers only");
+            message(Colors.RED +"Invalid input, please enter numbers only"+ Colors.RESET);
         }
         catch (Exception e)
         {
-            System.out.println("Invalid input, please try again");
+            System.out.println(Colors.RED +"Invalid input, please try again"+ Colors.RESET);
         }
         return choice;
+    }
+
+    public int getSignatureSandwich()
+    {
+        int choice = Integer.MAX_VALUE;
+        try {
+            System.out.println();
+            System.out.println(Colors.CYAN+"[1]"+Colors.BLACK+" - BLT"+Colors.RESET);
+            System.out.println(Colors.CYAN+"[2]"+Colors.BLACK+" - Philly cheese steak"+Colors.RESET);
+            System.out.println(Colors.CYAN+"[0]"+Colors.BLACK+" - Go Back to home screen"+Colors.RESET);
+            System.out.print("Enter input:");
+            choice = Integer.parseInt(userInput.nextLine());
+        }
+        catch (NumberFormatException e)
+        {
+            message(Colors.RED + " Invalid, input please enter numbers only."+ Colors.RESET);
+        }
+        catch (Exception e)
+        {
+            message(Colors.RED + "Invalid input, try again." + Colors.RESET);
+        }
+        return choice;
+    }
+
+    public String printSandwichToppings(ArrayList<Toppings> toppings)
+    {
+        for (int i = 0; i < toppings.size(); i++)
+        {
+            Toppings topping = toppings.get(i);
+            System.out.println(i+". " + topping.getType());
+        }
+        System.out.println("Would you like to remove any toppings? (Yes, No)");
+        System.out.print("Enter input: ");
+        return userInput.nextLine();
+    }
+
+    public ArrayList<Integer> removeToppings()
+    {
+        System.out.println();
+        System.out.println("Enter the toppings you want to remove in this format -> (2,5,3)");
+        System.out.print("Enter input");
+        String[] optionsSelected = (userInput.nextLine().replace(" ", "").split(","));
+        ArrayList<Integer> option = new ArrayList<>();
+
+        // looping through the option selected and converting them to integers
+        for (int i = 0; i < optionsSelected.length; i++)
+        {
+            int num = Integer.parseInt(optionsSelected[i]);
+            option.add(num);
+        }
+        return option;
+    }
+
+    public String addToppingOrNot()
+    {
+        System.out.println();
+        System.out.println("Would you like to add toppings? (Yes, No)");
+        System.out.println("Enter input: ");
+        return userInput.nextLine();
     }
 }

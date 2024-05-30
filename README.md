@@ -54,10 +54,13 @@ public void addSandWish(Order order) {
     }
 ```
 
-* Once the user enter's ("2"). The user will prompted for drink size and type. The program will then make a product object type of drink. Then it will be added to the order's products.
+* Once the user enter's ("2"). The user will prompted for drink size and type. The program will then make a product object type of drink. Then it will be added to the order's products ArrayList.
 
 * Once the user enter's ("3"). To add a chips to they're order. They will be prompted for the chips type then it will be added to the orders product arrayList. 
 
 * Once the user enter's ("4") to checkout. The receipt will be printed out and the user will have the option to cancel the order or confirm it. If The user confrims the receipt will get saved to receipts directory.
 
 ![checkout](images/checkOut.png)
+
+## Signature Sandwiches
+

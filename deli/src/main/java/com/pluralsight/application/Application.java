@@ -48,6 +48,9 @@ public class Application {
                     addChips(newOrder);
                     break;
                 case 4:
+                    signatureSandwich(newOrder);
+                    break;
+                case 5:
                     checkOut(newOrder);
                     return;
                 case 0:
@@ -85,9 +88,6 @@ public class Application {
         // checking if the sandwich is toasted from ui
         sandwich.setToasted(ui.isSandwichToasted());
         order.addProduct(sandwich);
-
-        ArrayList<Product> products = order.getOrder();
-        ArrayList<Toppings> toppings = sandwich.getToppings();
 
     }
 
@@ -165,6 +165,7 @@ public class Application {
 
     public void checkOut(Order order)
     {
+        // printing receipt and prompting user to confirm or cancel
         printReceipt(order);
         int choice = ui.checkOut();
         switch (choice)
@@ -189,6 +190,7 @@ public class Application {
         System.out.printf("Order number: %d \n", order.getOrderNumber());
         System.out.println("------------------------------------------");
 
+        // looping through all the products
         for (Product product : products)
         {
             if (product instanceof Sandwich)
@@ -219,6 +221,7 @@ public class Application {
 
     public void confirmOrder(Order order)
     {
+        // saving order to file
         System.out.println();
         FileManager.saveReceipt(order);
         System.out.println("Order number " + order.getOrderNumber() + " has been conformed, Enjoy :)");
@@ -226,6 +229,7 @@ public class Application {
 
     public void cancelOrder(Order order)
     {
+        // canceling order
         System.out.println();
         System.out.println("Order has been canceled");
     }
@@ -239,5 +243,61 @@ public class Application {
             case 12 -> "Large";
             default -> "";
         };
+    }
+
+    public void signatureSandwich(Order order)
+    {
+        int choice = ui.getSignatureSandwich();
+        switch (choice)
+        {
+            case 1:
+                createBlt(order);
+                break;
+            case 2:
+                createPhilly(order);
+                break;
+            case 0:
+                break;
+        }
+    }
+
+    private void createBlt(Order order)
+    {
+        // creating signature sandwich
+        Sandwich Blt = new SignatureSandwich("BLT", 8, "White");
+        String removeToppingOrNot = ui.printSandwichToppings(Blt.getToppings()); //<== array list topping to the function so i could get displayed
+
+        if (removeToppingOrNot.equalsIgnoreCase("yes"))
+        {
+            ArrayList<Integer> toppingsToRemove = ui.removeToppings();
+            for (int i = 0; i < toppingsToRemove.size(); i++)
+            {
+                for (int j = 0; j < Blt.getToppings().size(); j++)
+                {
+                    if (toppingsToRemove.get(i) == j)
+                    {
+                        Blt.getToppings().remove(Blt.getToppings().get(j));
+                    }
+                }
+            }
+        }
+
+        // checking if the user wants extra toppings
+        String addToppingsOrNot = ui.addToppingOrNot();
+        if (addToppingsOrNot.equalsIgnoreCase("yes"))
+        {
+            // getting all the toppings
+            String[] meat = ui.getSandWishMeat();
+            String[] cheese = ui.getSandWishCheese();
+            String[] regularToppings = ui.getRegularTopping();
+            String[] sauces = ui.getSauces();
+        }
+        order.addProduct(Blt);
+    }
+
+    public void createPhilly(Order order)
+    {
+        Sandwich phillyCheeseSteak = new SignatureSandwich("Philly cheese steak", 8, "White");
+        String removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
     }
 }
