@@ -267,15 +267,21 @@ public class Application {
         Sandwich Blt = new SignatureSandwich("BLT", 8, "White");
         String removeToppingOrNot = ui.printSandwichToppings(Blt.getToppings()); //<== array list topping to the function so i could get displayed
 
+        // checking if user wants to remove any toppings
         if (removeToppingOrNot.equalsIgnoreCase("yes"))
         {
+            // getting the toppings the user wants to remove
             ArrayList<Integer> toppingsToRemove = ui.removeToppings();
+
+            // looping through them toppings picked and sandwich toppings
             for (int i = 0; i < toppingsToRemove.size(); i++)
             {
                 for (int j = 0; j < Blt.getToppings().size(); j++)
                 {
+                    //checking if the index is the same
                     if (toppingsToRemove.get(i) == j)
                     {
+                        // removing toppings
                         Blt.getToppings().remove(Blt.getToppings().get(j));
                     }
                 }
@@ -288,6 +294,8 @@ public class Application {
         {
             // getting all the toppings
             String[] meat = ui.getSandWishMeat();
+            addMeatToSignatureSandwich(Blt, meat);
+
             String[] cheese = ui.getSandWishCheese();
             String[] regularToppings = ui.getRegularTopping();
             String[] sauces = ui.getSauces();
@@ -299,5 +307,40 @@ public class Application {
     {
         Sandwich phillyCheeseSteak = new SignatureSandwich("Philly cheese steak", 8, "White");
         String removeToppingOrNot = ui.printSandwichToppings(phillyCheeseSteak.getToppings());
+    }
+
+    public void addMeatToSignatureSandwich(Sandwich sandwich, String[] meat)
+    {
+        for (int i = 0; i < meat.length; i++)
+        {
+            // checking if the sandwich has meat if it does then meat[i] will be extra
+            boolean hasMeat = hasMeat(sandwich);
+            if (hasMeat)
+            {
+                sandwich.addTopping(new PremiumTopping(meat[i], sandwich.getSize(), false, false, false, true));
+            }
+            else
+            {
+                sandwich.addTopping(new PremiumTopping(meat[i], sandwich.getSize(), true, false, false, false));
+            }
+        }
+
+    }
+
+    public boolean hasMeat(Sandwich sandwich)
+    {
+        boolean hasMeat = false;
+        ArrayList<Toppings> toppings = sandwich.getToppings();
+        // looping through the sandwich topping
+        for (Toppings topping : toppings)
+        {
+            // checking if it has meat
+            if (topping instanceof PremiumTopping && ((PremiumTopping) topping).isMeat())
+            {
+                hasMeat = true;
+                break;
+            }
+        }
+        return hasMeat;
     }
 }
