@@ -241,7 +241,7 @@ public class Application {
         // saving order to file
         System.out.println();
         FileManager.saveReceipt(order);
-        System.out.println(Colors.GREEN + order.getOrderNumber() + " has been conformed, Enjoy :)"+Colors.RESET);
+        System.out.println(Colors.GREEN +"Order number "+ order.getOrderNumber() + " has been conformed, Enjoy :)"+Colors.RESET);
     }
 
     public void cancelOrder()
