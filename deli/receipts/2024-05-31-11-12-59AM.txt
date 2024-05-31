@@ -1,0 +1,27 @@
+Customer: fahd      
+Date: 2024-05-31 - 11:12:59 AM
+Order number: 44 
+------------------------------------------
+8 inch white bread, turkey sandwich Toasted : $7.00  
+turkey                   : $2.00      
+Extra steak              : $1.00      
+provolone cheese         : $1.50      
+lettuce                  : $0.00      
+jalapenos                : $0.00      
+onions                   : $0.00      
+mayo                     : $0.00      
+Medium pepsi                     2.50                
+lays                      1.50                
+8 inch White bread, Philly cheese steak Not toasted : $7.00  
+Steak                    : $2.00      
+American cheese          : $1.50      
+Peppers                  : $0.00      
+Mayo                     : $0.00      
+8 inch White bread, BLT Not toasted : $7.00  
+Cheddar cheese           : $1.50      
+Lettuce                  : $0.00      
+Tomato                   : $0.00      
+ranch                    : $0.00      
+turkeyBacon              : $2.00      
+none                     : $0.00      
+Total: $36.50

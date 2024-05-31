@@ -102,3 +102,22 @@ Sandwich phillyCheeseSteak = new SignatureSandwich("Philly cheese steak", 8, "Wh
 ![checkOutBlt](images/checkOutBlt.png)
 
 ## Instructions on how to use the application
+
+To use this application you would use any java IDE or terminal. What you would do is run the main file on the terminal/IDE. Once you run the application, you should be in the home screen.
+
+![home screen](images/homeScreen.png)
+
+1) Once your in the home screen you either enter ("1") to add a new order, or 0 to exit. 
+
+![order screen](images/orderScreen.png)
+
+2) When you enter one, you will be prompted for your name then the order screen will be displayed. You could enter "1" to add a sandwich, "2" to add a drink, "3" to add chips, "4" to add signature sandwich, "5" to check out, and finally "0" to cancel the order.
+
+![add sandwich example](images/addSandwichexample.png)
+
+3) If you enter one in the order screen to add a sandwich, you will be prompted for all the sandwich info. what do you want on like meat, cheese, veggies, mayo, toasted or not. Once you finish making your sandwich you could also add chips, drinks, and you could also add one of the delis signature sandwiches.
+
+
+![check out screen](images/checkOutScreen.png)
+
+4) Once your done with your order and enter 5 to check out. The program will print out your receipt and prompts you to confirm or cancel the order. If you confirm the order the receipt will be saved to the receipts directory.

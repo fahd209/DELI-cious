@@ -57,7 +57,7 @@ public class Application {
                     System.out.println("Canceling order");
                     break;
                 default:
-                    System.out.println("Invalid input");
+                    System.out.println(Colors.RED+"Invalid input"+Colors.RESET);
             }
         }
     }
