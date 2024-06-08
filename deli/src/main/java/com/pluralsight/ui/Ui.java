@@ -24,8 +24,8 @@ public class Ui {
                 System.out.println();
                 System.out.println(Colors.CYAN+"      Welcome to the bay Area's deli     "+Colors.RESET);
                 System.out.println("*****************************************");
-                System.out.println(Colors.CYAN+"[1]" + Colors.BLACK + " - New order"+ Colors.RESET);
-                System.out.println(Colors.RED +"[0]"+Colors.BLACK +" - Exit"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[1]" + Colors.WHITE + " - New order"+ Colors.RESET);
+                System.out.println(Colors.RED +"[0]"+Colors.WHITE +" - Exit"+Colors.RESET);
                 System.out.print("Enter input:");
                 choice = Integer.parseInt(userInput.nextLine().strip());
                 switch (choice) {
@@ -67,12 +67,12 @@ public class Ui {
         while (choice != 0) {
             try {
                 System.out.println();
-                System.out.println(Colors.CYAN+"[1]"+Colors.BLACK+" - Add sandwich"+Colors.RESET);
-                System.out.println(Colors.CYAN+"[2]"+Colors.BLACK+" - Add drink"+Colors.RESET);
-                System.out.println(Colors.CYAN+"[3]"+Colors.BLACK+" - Add Chips"+Colors.RESET);
-                System.out.println(Colors.CYAN+"[4]"+Colors.BLACK+" - Signature sandwiches"+Colors.RESET);
-                System.out.println(Colors.CYAN+"[5]"+Colors.BLACK+" - Check out"+Colors.RESET);
-                System.out.println(Colors.RED+"[0]"+Colors.BLACK+" - Cancel order and go back to home screen"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[1]"+Colors.WHITE+" - Add sandwich"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[2]"+Colors.WHITE+" - Add drink"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[3]"+Colors.WHITE+" - Add Chips"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[4]"+Colors.WHITE+" - Signature sandwiches"+Colors.RESET);
+                System.out.println(Colors.CYAN+"[5]"+Colors.WHITE+" - Check out"+Colors.RESET);
+                System.out.println(Colors.RED+"[0]"+Colors.WHITE+" - Cancel order and go back to home screen"+Colors.RESET);
                 System.out.print("Enter input:");
                 choice = Integer.parseInt(userInput.nextLine().strip());
 
@@ -207,8 +207,8 @@ public class Ui {
         int choice = 0;
         try {
             System.out.println();
-            System.out.println(Colors.GREEN+"[1]"+Colors.BLACK+" - Confirm order"+Colors.RESET);
-            System.out.println(Colors.RED+"[2]"+Colors.BLACK+" - Cancel order"+Colors.RESET);
+            System.out.println(Colors.GREEN+"[1]"+Colors.WHITE+" - Confirm order"+Colors.RESET);
+            System.out.println(Colors.RED+"[2]"+Colors.WHITE+" - Cancel order"+Colors.RESET);
             System.out.print("Enter input: ");
             choice = Integer.parseInt(userInput.nextLine().strip());
         }
@@ -228,9 +228,9 @@ public class Ui {
         int choice = Integer.MAX_VALUE;
         try {
             System.out.println();
-            System.out.println(Colors.CYAN+"[1]"+Colors.BLACK+" - BLT"+Colors.RESET);
-            System.out.println(Colors.CYAN+"[2]"+Colors.BLACK+" - Philly cheese steak"+Colors.RESET);
-            System.out.println(Colors.CYAN+"[0]"+Colors.BLACK+" - Go Back to home screen"+Colors.RESET);
+            System.out.println(Colors.CYAN+"[1]"+Colors.WHITE+" - BLT"+Colors.RESET);
+            System.out.println(Colors.CYAN+"[2]"+Colors.WHITE+" - Philly cheese steak"+Colors.RESET);
+            System.out.println(Colors.CYAN+"[0]"+Colors.WHITE+" - Go Back to home screen"+Colors.RESET);
             System.out.print("Enter input:");
             choice = Integer.parseInt(userInput.nextLine());
         }
