@@ -49,7 +49,9 @@ public class FileManager {
                     writer.printf("%-25s %-20.2f\n", product.getName(), product.getPrice());
                 }
             }
+            
             writer.printf("Total: $%.2f", order.getTotal());
+            System.out.println("✅ Receipt saved for order #" + order.getOrderNumber());
         }
         catch (IOException e)
         {
