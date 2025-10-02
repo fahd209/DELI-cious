@@ -53,7 +53,7 @@ public class FileManager {
         }
         catch (IOException e)
         {
-            System.out.println("Error while saving receipt error= : {{" + e.getMessage() + "}}");
+        System.out.println("Error while saving receipt error= : {{{" + e.getMessage() + "}}}");
         }
         catch (Exception e)
         {
