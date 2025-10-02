@@ -53,8 +53,7 @@ public class FileManager {
         }
         catch (IOException e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("File does not exist");
+            System.out.println("Error while saving receipt: " + e.getMessage());
         }
         catch (Exception e)
         {
