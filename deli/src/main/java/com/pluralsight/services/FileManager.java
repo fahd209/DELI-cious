@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class FileManager {
     public static void saveReceipt(Order order)
     {
-        System.out.println("Creating a reciept for your order");
+        System.out.println("Saving receipt...");
         String receiptDate = order.getOrderDate().replace(" ", "").replace(":", "-");
         File file = new File("receipts\\"+receiptDate+".txt");
 
