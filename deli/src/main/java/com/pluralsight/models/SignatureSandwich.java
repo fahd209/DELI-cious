@@ -49,6 +49,7 @@ public class SignatureSandwich extends Sandwich{
 
     @Override
     public void setToppings(ArrayList<Toppings> toppings) {
+        System.out.println("adding topping to sandwish");
         this.toppings = toppings;
     }
 
