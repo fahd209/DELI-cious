@@ -9,6 +9,7 @@ public class Drink extends Product{
     @Override
     public double getPrice()
     {
+        System.out.println("getting drinks price");
         // Drink size 4: S, 8: M, 12: L
         return switch (getSize())
         {
