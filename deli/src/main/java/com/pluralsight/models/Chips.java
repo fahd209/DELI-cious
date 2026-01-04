@@ -9,6 +9,7 @@ public class Chips extends Product{
     @Override
     public double getPrice()
     {
+        System.out.println("Getting chips price");
         return 1.50;
     }
 }
