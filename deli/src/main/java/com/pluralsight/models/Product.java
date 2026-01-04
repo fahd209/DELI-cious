@@ -11,6 +11,7 @@ public abstract class Product {
     }
 
     public String getName() {
+        System.out.println("Getting products name...");
         return name;
     }
 
